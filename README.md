@@ -8,3 +8,5 @@ Cài thư viện
 npm i express express-handlebars method-override mongoose nodemon body-parser 
 ```
 
+Run project
+`npm start`
