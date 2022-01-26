@@ -10,3 +10,8 @@ npm i express express-handlebars method-override mongoose nodemon body-parser
 
 Run project
 `npm start`
+
+Cài thêm
+```python
+npm i config
+```
