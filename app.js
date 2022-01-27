@@ -1,29 +1,34 @@
-const express = require('express');
-const connectDB = require('./config/db');
-const { engine } = require('express-handlebars')
+const express = require("express");
+const connectDB = require("./config/db");
+const { engine } = require("express-handlebars");
+const bodyParser = require("body-parser");
 
 // Nhap khau routes
-const posts = require('./router/posts');
+const posts = require("./router/posts");
 
 // Khởi động app
 const app = express();
 
 // Khoi dong Handlebars middleware
-app.engine('handlebars', engine())
-app.set('view engine', 'handlebars')
+app.engine("handlebars", engine());
+app.set("view engine", "handlebars");
+
+// Khoi dong bodyParser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //  Khởi động express middleware
-app.use(express.json())
+app.use(express.json());
 
 // Kết nối CSDL
-connectDB()
+connectDB();
 
 // Mot so routes co ban, co the dua vao file rieng trong thu muc routes
-app.get('/', (req, res) => res.render('index'))
-app.get('/about', (req, res) => res.render('about'))
+app.get("/", (req, res) => res.render("index"));
+app.get("/about", (req, res) => res.render("about"));
 
 // Mang routes vao de su dung
-app.use('/posts', posts)
+app.use("/posts", posts);
 
-const PORT = 5000
-app.listen(PORT, () => console.log(`Server started on ${PORT}`))
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server started on ${PORT}`));
