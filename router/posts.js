@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../model/Post");
 
+// Hien thi tat ca cac bai viet
+router.get("/", async (req, res) => {
+    const posts = await Post.find().lean().sort({ date: -1 });
+    res.render("posts/index", { posts });
+});
+
 // Hien thi form de tao bai viet moi
 router.get("/add", (req, res) => {
     res.render("posts/add");
