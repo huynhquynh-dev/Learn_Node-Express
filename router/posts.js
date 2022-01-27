@@ -30,4 +30,17 @@ router.post("/", async (req, res) => {
     }
 });
 
+// Hien thi form de nguoi dung thay doi bai viet
+router.get("/edit/:id", async (req, res) => {
+    const post = await Post.findOne({ _id: req.params.id }).lean();
+    res.render("posts/edit", { post });
+});
+
+// Cap nhap thay doi bai viet vao co so du lieu
+router.put("/:id", async (req, res) => {
+    const { title, text } = req.body;
+    await Post.findOneAndUpdate({ _id: req.params.id }, { title, text });
+    res.redirect("/posts");
+});
+
 module.exports = router;
